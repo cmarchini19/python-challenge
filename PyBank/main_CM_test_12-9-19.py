@@ -9,43 +9,36 @@ import csv
 #Step 2: Identify the budget_data.csv file we'll use for PyPoll
 bankcsv = os.path.join("Resources","budget_data.csv")
 
+dates = []
+total = 0.0
+average = [(total + int(row[1])]
+
 with open(bankcsv, newline="") as csvfile:
     bankreader = csv.reader(csvfile, delimiter=",")
     #print(bankreader)
     
     bank_header = next(bankreader)
-    #DEBUGGING - print(f"Header: {bank_header}")
 
     for row in bankreader:
-        print(row[1])
 
-        #DEBUGGING - print("Step 2 works!")
+        #Step 3: Find the total number of months included in the dataset (Output will be 'Total months: 86')
+        dates.append(row[0])
+
+        #Step 4: Find the net total amount of "Profit/Losses" over the entire period (total will be $38,382,578)
+        total = total + int(row[1])
+
+        #Step 5: Find the average of the changes in "Profit/Losses" over the entire period (avg. will be -$2,315.12)
+        avg_change = 
+
+    print(f'Total Months: {len(dates)}')
+    print(f'Total Profit/Loss: ${total}')
 
 
-#Step 3: Find the total number of months included in the dataset (Output will be 'Total months: 86')
-    #Working notes:  
-        #-How do I add up all the rows in the first column for months?
-        #-Use "for row" from Netflix exercise?
-        # print(f"Total months: " + sum(row(0))
-
-#def months(month):
-       #length = len(month)
-       #total = 0.0
-       #for month in months:
-          # total += sum((row[0])
-       # return total
-
-#print (months)
-#print ("Step 3 works!")      
     
-
 #Step 4: Find the net total amount of "Profit/Losses" over the entire period (total will be $38,382,578)
 
-#def net(amount):
- #       total = 0.0
-  #      for amount in net:
-   #         total += int(row[1])
-    #    return total
+    # total = total + int(row[1])
+    # print(f'Total Profit/Loss: {total}')
 
 #print (net)
 
