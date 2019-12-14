@@ -65,8 +65,15 @@ with open(bankcsv, newline="") as csvfile:
     print(f'Greatest Increase: {greatestincmonth} ${greatestincrease}')
     print(f'Greatest Decrease: {greatestdecmonth} ${greatestdecrease}')
 
-    #print(f"Greatest Decrease:"  
-
-
-
 #Step 8: Your final script should both print the analysis to the terminal and export a text file with the results.
+    outputpath = os.path.join("output","PyBankAnalysis.txt")
+    outputfile = open(outputpath, "w")
+
+    #Writing out the text
+    outputfile.writelines("Financial Analysis")
+    outputfile.writelines("\n------------------")
+    outputfile.writelines(f'\nTotal Months: {len(dates)}')
+    outputfile.writelines(f'\nTotal Profit/Loss: ${total}')
+    outputfile.writelines(f'\nAverage Profit/Losses Change: ${averagechange}')
+    outputfile.writelines(f'\nGreatest Increase: {greatestincmonth} ${greatestincrease}')
+    outputfile.writelines(f'\nGreatest Decrease: {greatestdecmonth} ${greatestdecrease}')
