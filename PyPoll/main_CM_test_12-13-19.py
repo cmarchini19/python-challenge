@@ -17,24 +17,24 @@ with open(pollcsv, newline="") as csvfile:
     election_reader = next(electionreader)
     
     for row in electionreader:
-        #Step 3: Collect number of votes
+        #Step 3: Collect number of total votes
         totalvotes = totalvotes + 1
 
-        #Step 4: Identify Candidate Data
+        #Step 4: Identify where candidate data is located
         candidate = row[2]
 
-        #Step 5: how many votes did the candidates receive?
+        #Step 5: Identify how many votes each candidate received
         if candidate not in candidates.keys():
             candidates[candidate] = [row[0]]
             
         else:
             candidates[candidate].append(row[0])
 
-    #Step 6: what is the percentage of votes the candidates received?
+    #Step 6: Identify what percentage of votes the candidates received
     for candidatename in candidates.keys():
         percentages[candidatename] = len(candidates[candidatename])/totalvotes * 100
 
-#Step 7: Print Values
+#Step 7: Print election results
 print(f'Election Results')
 print("-------------------")
 print(f'Total Votes: {totalvotes}')
@@ -42,6 +42,18 @@ print("-------------------")
 for candidatename in candidates.keys():
     print(f'{candidatename} {len(candidates[candidatename])} ({round(percentages[candidatename],3)}%)')
 print("-------------------")
-print("Winner")
+print(f'Winner: ')
 
-#Step 8: Write output file/csv
+#Step 8: Your final script should both print the analysis to the terminal and export a text file with the results.
+outputpath = os.path.join("output","PyPollAnalysis.txt")
+outputfile = open(outputpath, "w")
+
+#Writing out the text
+outputfile.writelines(f'Election Results')
+outputfile.writelines("\n-------------------")
+outputfile.writelines(f'\nTotal Votes: {totalvotes}')
+outputfile.writelines("\n-------------------")
+for candidatename in candidates.keys():
+    outputfile.writelines(f'\n{candidatename} {len(candidates[candidatename])} ({round(percentages[candidatename],3)}%)')
+outputfile.writelines("\n-------------------")
+outputfile.writelines(f'\nWinner: ')
