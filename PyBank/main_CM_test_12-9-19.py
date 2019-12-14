@@ -5,22 +5,28 @@
 import os
 import csv
 
-
 #Step 2: Define and Identify the budget_data.csv file we'll use for PyBank
 bankcsv = os.path.join("Resources","budget_data.csv")
 
 dates = []
-total = 0.0
-#average = [(total + int(row[1])]
-greatestincrease = []
+total = 0
+profitlossprevious = 0
+totalrowchange = 0
+greatestincrease = 0
+greatestdecrease = 0
 
 with open(bankcsv, newline="") as csvfile:
     bankreader = csv.reader(csvfile, delimiter=",")
     #print(bankreader)
     
     bank_header = next(bankreader)
-
+    
     for row in bankreader:
+
+        #Checking to see if there's a month
+        if len(dates) == 0.0:
+            profitlossprevious = int(row[1])
+            print("Otherworks")
 
         #Step 3: Find the total number of months included in the dataset (Output will be 'Total months: 86')
         dates.append(row[0])
@@ -29,26 +35,37 @@ with open(bankcsv, newline="") as csvfile:
         total = total + int(row[1])
 
         #Step 5: Find the average of the changes in "Profit/Losses" over the entire period (avg. will be -$2,315.12)
-        #avg_change = 
 
-        
+        rowchange = int(row[1]) - profitlossprevious 
+        totalrowchange = totalrowchange + rowchange
+        profitlossprevious = int(row[1])
+
         #Step 6: Find the greatest increase in profits (date and amount) over the entire period (result will be Feb-2012 $1,926,159)
         
-        #greatestincrease = max(total + int(row[1])
+        if rowchange > greatestincrease:
+            greatestincmonth = row[0]  
+            greatestincrease = rowchange
+
+        #greatestincrease = max(greatestincrease + int(row[1])
 
         #Step 7: Find the greatest decrease in losses (date and amount) over the entire period (result will be Sep-2013  $(2,196,167)
-   
+        if rowchange < greatestdecrease:
+            greatestdecmonth = row[0]
+            greatestdecrease = rowchange
 
-    
+    averagechange = round(totalrowchange / (len(dates)-1), 2)
+
     #Print results
     
     print("Financial Analysis")
     print("------------------")
     print(f'Total Months: {len(dates)}')
     print(f'Total Profit/Loss: ${total}')
-    #print(f'Average Profit/Losses Change: ${average})
-    #print(f'Greatest Increase: {max(total)}')
-    #print(f"Greatest Decrease:"  )
+    print(f'Average Profit/Losses Change: ${averagechange}')
+    print(f'Greatest Increase: {greatestincmonth} ${greatestincrease}')
+    print(f'Greatest Decrease: {greatestdecmonth} ${greatestdecrease}')
+
+    #print(f"Greatest Decrease:"  
 
 
 
