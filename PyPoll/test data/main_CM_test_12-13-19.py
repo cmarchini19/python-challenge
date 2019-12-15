@@ -11,6 +11,8 @@ pollcsv = os.path.join("Resources","election_data.csv")
 totalvotes = 0
 candidates = {}
 percentages = {}
+votes= {}
+totalcandidatevotes = 0
 
 with open(pollcsv, newline="") as csvfile:
     electionreader = csv.reader(csvfile, delimiter=",")
@@ -32,6 +34,7 @@ with open(pollcsv, newline="") as csvfile:
 
     #Step 6: Identify what percentage of votes the candidates received
     for candidatename in candidates.keys():
+        votes[candidatename] = len(candidates[candidatename])
         percentages[candidatename] = len(candidates[candidatename])/totalvotes * 100
 
 #Step 7: Print election results
@@ -41,8 +44,14 @@ print(f'Total Votes: {totalvotes}')
 print("-------------------")
 for candidatename in candidates.keys():
     print(f'{candidatename} {len(candidates[candidatename])} ({round(percentages[candidatename],3)}%)')
+
+for candidatename in candidates.keys():    
+    if len(candidates[candidate]) > totalcandidatevotes:
+        totalcandidatevotes = len(candidates[candidate])
+        winner = candidatename
 print("-------------------")
-print(f'Winner: ')
+print(f'Winner: {winner}')
+print("-------------------")
 
 #Step 8: Your final script should both print the analysis to the terminal and export a text file with the results.
 outputpath = os.path.join("output","PyPollAnalysis.txt")
@@ -56,4 +65,5 @@ outputfile.writelines("\n-------------------")
 for candidatename in candidates.keys():
     outputfile.writelines(f'\n{candidatename} {len(candidates[candidatename])} ({round(percentages[candidatename],3)}%)')
 outputfile.writelines("\n-------------------")
-outputfile.writelines(f'\nWinner: ')
+outputfile.writelines(f'\nWinner: {winner}')
+outputfile.writelines("\n-------------------")

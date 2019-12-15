@@ -46,8 +46,6 @@ with open(bankcsv, newline="") as csvfile:
             greatestincmonth = row[0]  
             greatestincrease = rowchange
 
-        #greatestincrease = max(greatestincrease + int(row[1])
-
         #Step 7: Find the greatest decrease in losses (date and amount) over the entire period (result will be Sep-2013  $(2,196,167)
         if rowchange < greatestdecrease:
             greatestdecmonth = row[0]
