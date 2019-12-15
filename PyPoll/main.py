@@ -63,7 +63,7 @@ outputfile.writelines("\n-------------------")
 outputfile.writelines(f'\nTotal Votes: {totalvotes}')
 outputfile.writelines("\n-------------------")
 for candidatename in candidates.keys():
-    outputfile.writelines(f'\n{candidatename} {len(candidates[candidatename])} ({round(percentages[candidatename],3)}%)')
+    outputfile.writelines(f'\n{candidatename}: {len(candidates[candidatename])} ({round(percentages[candidatename],3)}%)')
 outputfile.writelines("\n-------------------")
 outputfile.writelines(f'\nWinner: {winner}')
 outputfile.writelines("\n-------------------")
